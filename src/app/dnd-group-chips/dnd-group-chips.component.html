@@ -1,0 +1,50 @@
+<div class="dnd-group-chips">
+  <ul class="list"
+    dnd-sortable-container
+    [sortableData]="dummyList"
+  >
+    <li class="list__parent-elem"
+      *ngFor="let item of dummyList; let i = index"
+      dnd-sortable
+      [sortableIndex]="i"
+    >
+    <div class="name" *ngIf="item.attributeDetails">
+      {{checkTaxonomyName(item)}}
+    </div>
+
+      <ul class="list__parent-elem--container"
+      *ngIf="item.operands && item.operands.length"
+      >
+        <li class="last-child"
+          *ngFor="let childItem of item.operands"
+        >
+          <div>
+            {{checkTaxonomyName(childItem)}}
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+   <!-- <div class="list">
+     <div class="list__parent-elem"
+      dnd-sortable-container
+      [sortableData]="dummyList">
+       <div class="list__parent-elem--container"
+        *ngFor="let item of dummyList; let i = index"
+        dnd-sortable
+        [sortableIndex]="i">
+         <div class="last-child"
+         [sortableData]="item.operands"
+         dnd-sortable-container>
+         <div
+          *ngFor="let childItem of item.operands; let j = index"
+          dnd-sortable
+          [sortableIndex]="j">
+            {{checkTaxonomyName(childItem)}}
+         </div>
+         
+         </div>
+       </div>
+     </div>
+   </div> -->
+</div>
