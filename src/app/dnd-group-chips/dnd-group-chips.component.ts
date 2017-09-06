@@ -15,12 +15,8 @@ export class DndGroupChipsComponent implements OnInit {
   ngOnInit() {
   }
 
-  groupDropSuccess($event: any) {
-    console.log('groupDropSuccess', $event);
-  }
-
-  itemDropSuccess($event: any) {
-    console.log('itemDropSuccess', $event);
+  onItemDragSuccess($event: any) {
+    console.log('dummyList', this.dummyList);
   }
 
   checkTaxonomyName(elem: any): string {

@@ -7,6 +7,8 @@
       *ngFor="let item of dummyList; let i = index"
       dnd-sortable
       [sortableIndex]="i"
+      [dragData]="item"
+      (onDragSuccess)="onItemDragSuccess(item)"
     >
     <div class="name" *ngIf="item.attributeDetails">
       {{checkTaxonomyName(item)}}
@@ -25,26 +27,4 @@
       </ul>
     </li>
   </ul>
-   <!-- <div class="list">
-     <div class="list__parent-elem"
-      dnd-sortable-container
-      [sortableData]="dummyList">
-       <div class="list__parent-elem--container"
-        *ngFor="let item of dummyList; let i = index"
-        dnd-sortable
-        [sortableIndex]="i">
-         <div class="last-child"
-         [sortableData]="item.operands"
-         dnd-sortable-container>
-         <div
-          *ngFor="let childItem of item.operands; let j = index"
-          dnd-sortable
-          [sortableIndex]="j">
-            {{checkTaxonomyName(childItem)}}
-         </div>
-         
-         </div>
-       </div>
-     </div>
-   </div> -->
 </div>
