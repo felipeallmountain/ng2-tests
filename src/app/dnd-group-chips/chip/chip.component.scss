@@ -1,0 +1,10 @@
+.chip {
+  margin: 2px;
+  &__title {
+    background: white;
+    transition: background 0.3s ease;
+    &.selected {
+      background: gray;
+    }
+  }
+}

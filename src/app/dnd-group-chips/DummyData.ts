@@ -5,15 +5,51 @@ export let DummyData = {
             {
                 "logicalOperator": "AND",
                 "notSignPresent": false,
-                "attributeDetails": {
-                    "price": 10.4,
-                    "size": 10000,
-                    "path": "/some/path",
-                    "taxonomyNodeName": "ATTR 1"
-                }
+                "operands": [
+                    {
+                        "logicalOperator": "OR",
+                        "notSignPresent": false,
+                        "attributeDetails": {
+                            "price": 10.4,
+                            "size": 10000,
+                            "path": "/some/path",
+                            "taxonomyNodeName": "ATTR 1.1"
+                        }
+                    },
+                    {
+                        "logicalOperator": "AND",
+                        "notSignPresent": false,
+                        "attributeDetails": {
+                            "price": 10.4,
+                            "size": 10000,
+                            "path": "/some/path",
+                            "taxonomyNodeName": "ATTR 1.2"
+                        }
+                    },
+                    {
+                        "logicalOperator": "AND",
+                        "notSignPresent": false,
+                        "attributeDetails": {
+                            "price": 10.4,
+                            "size": 10000,
+                            "path": "/some/path",
+                            "taxonomyNodeName": "ATTR 1.3"
+                        }
+                    },
+                    {
+                        "logicalOperator": "AND",
+                        "notSignPresent": false,
+                        "attributeDetails": {
+                            "price": 10.4,
+                            "size": 10000,
+                            "path": "/some/path",
+                            "taxonomyNodeName": "ATTR 1.4"
+                        }
+                    }
+                ]
             },
             {
-                "logicalOperator": "OR",
+                "logicalOperator": "AND",
                 "notSignPresent": false,
                 "operands": [
                     {
@@ -33,23 +69,30 @@ export let DummyData = {
                             "price": 10.4,
                             "size": 10000,
                             "path": "/some/path",
-                            "taxonomyNodeName": "ATTR2.2"
+                            "taxonomyNodeName": "ATTR 2.2"
                         }
                     }
                 ]
             },
             {
-                "logicalOperator": "AND",
+                "logicalOperator": "OR",
                 "notSignPresent": false,
-                "attributeDetails": {
-                    "price": 10.4,
-                    "size": 10000,
-                    "path": "/some/path",
-                    "taxonomyNodeName": "ATTR 3"
-                }
+                "operands": [
+                    {
+                        "logicalOperator": "OR",
+                        "notSignPresent": false,
+                        "attributeDetails": {
+                            "price": 10.4,
+                            "size": 10000,
+                            "path": "/some/path",
+                            "taxonomyNodeName": "ATTR 3.1"
+                        }
+                    }
+
+                ]
             },
             {
-                "logicalOperator": "OR",
+                "logicalOperator": "AND",
                 "notSignPresent": false,
                 "operands": [
                     {
@@ -79,7 +122,7 @@ export let DummyData = {
                             "price": 10.4,
                             "size": 10000,
                             "path": "/some/path",
-                            "taxonomyNodeName": "ATTR 4.2"
+                            "taxonomyNodeName": "ATTR 4.3"
                         }
                     }
                 ]

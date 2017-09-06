@@ -1,28 +1,31 @@
 <div class="dnd-group-chips">
+  <nav class="grouper">
+    <button *ngIf="selectedChipGroups.length > 1" (click)="group()">Group</button>        
+    <button (click)="ungroup()">Ungroup</button>
+    <button (click)="selectAll()">Select All</button>
+  </nav>
   <ul class="list"
     dnd-sortable-container
-    [sortableData]="dummyList"
+    [sortableData]="modifiedList"
   >
     <li class="list__parent-elem"
-      *ngFor="let item of dummyList; let i = index"
+      *ngFor="let item of modifiedList; let i = index"
       dnd-sortable
       [sortableIndex]="i"
       [dragData]="item"
       (onDragSuccess)="onItemDragSuccess(item)"
-    >
-    <div class="name" *ngIf="item.attributeDetails">
-      {{checkTaxonomyName(item)}}
-    </div>
-
-      <ul class="list__parent-elem--container"
-      *ngIf="item.operands && item.operands.length"
-      >
+    > 
+      <ul class="list__parent-elem--container">
         <li class="last-child"
-          *ngFor="let childItem of item.operands"
+          *ngFor="let childItem of item.operands; let j = index"
         >
-          <div>
-            {{checkTaxonomyName(childItem)}}
-          </div>
+          <app-chip
+            [chipCollection]="item"
+            [chipData]="childItem"
+            (onSelect)="selectChip($event)"
+            [isLast]="checkIfIsLastChipGroup(item.operands.length, j, modifiedList.length, i)"
+          >
+          </app-chip>
         </li>
       </ul>
     </li>

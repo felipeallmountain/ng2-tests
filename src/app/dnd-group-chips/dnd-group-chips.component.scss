@@ -5,6 +5,10 @@
 }
 
 .dnd-group-chips {
+  .grouper {
+    margin-bottom: 20px;
+  }
+
   .list {
     @extend .no-list-style;
     background: red;
@@ -40,13 +44,7 @@
         margin: 2px;
       }
       &--container {
-        background: green;
         @extend .no-list-style;
-        .last-child {
-          background: white;
-          height: 30px;
-          margin: 2px;
-        }
       }      
     }
   }
