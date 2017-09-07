@@ -1,8 +1,9 @@
 .chip {
   margin: 2px;
   &__title {
-    background: white;
+    background: cyan;
     transition: background 0.3s ease;
+    height: 80px;
     &.selected {
       background: gray;
     }

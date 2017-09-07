@@ -21,7 +21,7 @@ export class ChipComponent implements OnInit {
   switchSelected() {
     this.chipData.selected = !this.chipData.selected;
     const chipSelected = {
-      selected: this.chipData.selected,
+      chipData: this.chipData,
       collection: this.chipCollection
     };
     this.onSelect.emit(chipSelected);

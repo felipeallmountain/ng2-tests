@@ -10,19 +10,21 @@ import * as _ from 'lodash';
 })
 export class DndGroupChipsComponent implements OnInit {
 
-  dummyList = DummyData.content.audienceAttributes;
-
   modifiedList: any[];
-  selectedChipGroups = [];
+  selectedChipGroups: any[] = [];
+  selectedChipItems: any[] = [];
+  selectedGroupIndex: number = -1;
 
   constructor() { }
 
   ngOnInit() {
+    this.modifiedList = _.cloneDeep(
+      DummyData.content.audienceAttributes
+    );
     this.setChipsSelectedToFalse();
   }
 
   setChipsSelectedToFalse() {
-    this.modifiedList = _.cloneDeep(this.dummyList);
     _.forEach(this.modifiedList, (val: any) => {
       _.forEach(val.operands, (childVal: any) => {
         childVal.selected = false;
@@ -30,43 +32,150 @@ export class DndGroupChipsComponent implements OnInit {
     });
   }
 
-
-  onItemDragSuccess($event: any) {
-    console.log('modifiedList', this.modifiedList);
+  unselectAll(): void {
+    this.selectedChipGroups = [];
+    this.selectedChipItems = [];
+    this.setChipsSelectedToFalse();
+    this.selectedGroupIndex = -1;
   }
 
-  selectChip(selectedChip: any): void {
-    const collection = selectedChip.collection;
+  onItemDragSuccess(evt) {
+    console.log('onItemDragSuccess', evt);
+    this.arrangeGroupOperands();
+  }
+
+  arrangeGroupOperands() {
+    _.forEach(this.modifiedList, (val: any) => {
+      const groupIndex = val.operands.length - 1;
+      val.logicalOperator = val.operands[groupIndex].logicalOperator;
+    });
+  }
+
+  onDropSuccess(evt) {
+    console.log('onDropSuccess', evt);
+  }
+
+  selectChip(chipSelected: any): void {
+    const collection = chipSelected.collection;
+    const chip = chipSelected.chipData;
+
+    if (chip.selected) {
+      this.selectChipGroups(collection);
+      this.selectChipItems(chip);
+    } else {
+      this.unselectChipGroups(collection);
+      this.unselectChipItems(chip);
+    }
+  }
+
+  selectChipGroups(collection): void {
     const collectionIndex = _.findIndex(
       this.selectedChipGroups,
       col => _.isEqual(col, collection)
     );
-
-    if (selectedChip.selected) {
-      if (collectionIndex < 0) {
-        this.selectedChipGroups.push(collection);
-      }
-    } else {
-      const areAllChipsUnselected = _.every(collection.operands, ['selected', false]);
-      if (areAllChipsUnselected) {
-        _.remove(this.selectedChipGroups, collection);
-      }
+    if (collectionIndex < 0) {
+      this.selectedChipGroups.push(collection);
+      this.selectedGroupIndex = this.getFirstIndexFromSelected();
     }
   }
 
+  unselectChipGroups(collection): void {
+    const areAllChipsUnselected = _.every(
+      collection.operands,
+      ['selected', false]
+    );
+    if (areAllChipsUnselected) {
+      _.remove(this.selectedChipGroups, collection);
+    }
+  }
+
+  selectChipItems(chip): void {
+    this.selectedChipItems.push(chip);
+  }
+
+  unselectChipItems(chip): void {
+    _.remove(this.selectedChipItems, chip);
+  }
+
+  getFirstIndexFromSelected(): number {
+    const firstElem = this.selectedChipGroups[0];
+    const listIndex = this.modifiedList.indexOf(firstElem);
+    return this.selectedGroupIndex < 0 ?
+      listIndex : listIndex < this.selectedGroupIndex
+        ? listIndex : this.selectedGroupIndex;
+  }
+
   group(): void {
-    // this.removeAttributesFromPlace();
-    // this.clearEmptyGroups();
-    // this.dummyList.unshift(
-    //   this.createNewAttributesGroup()
-    // );
-    // this.selectedChips = [];
+    const mergedGroup = this.getMergedSelectedGroups();
+    this.removeSelectedGroups();
+    this.addNewGroup(mergedGroup);
+    this.unselectAll();
+    this.arrangeGroupOperands();
+  }
+
+  getMergedSelectedGroups(): any {
+    const firstElem = _.cloneDeep(this.selectedChipGroups[0]);
+    _.forEach(this.selectedChipGroups, (val: any, index: number) => {
+      if (index > 0) {
+        firstElem.operands = [
+          ...firstElem.operands, ...val.operands
+        ];
+      }
+    });
+    return firstElem;
+  }
+
+  removeSelectedGroups(): void {
+    _.forEach(this.selectedChipGroups, val => {
+      _.remove(this.modifiedList, val);
+    });
+  }
+
+  addNewGroup(newGroup: any) {
+    this.modifiedList.splice(this.selectedGroupIndex, 0, newGroup);
   }
 
   ungroup(): void {
+    if (!this.selectedChipItems.length) {
+      return;
+    }
+    const unselectedGroups = this.getNewUnselectedGroups();
+    this.removeItemsFromSelectedGroups();
+    this.addNewUnselectedGroups(unselectedGroups);
+    this.unselectAll();
+    this.arrangeGroupOperands();
   }
 
-  selectAll(): void {
+  removeItemsFromSelectedGroups() {
+    _.forEach(this.modifiedList, (val: any) => {
+      if (val) {
+        _.forEach(this.selectedChipItems, chip => {
+          _.remove(val.operands, chip);
+          if (!val.operands.length) {
+            _.remove(this.modifiedList, val);
+          }
+        });
+      }
+    });
+  }
+
+  getNewUnselectedGroups() {
+    return _.map(
+      this.selectedChipItems,
+      val => this.createNewGroup(_.cloneDeep(val))
+    );
+  }
+
+  createNewGroup(chip) {
+    return {
+      logicalOperator: chip.logicalOperator,
+      notSignPresent: false,
+      operands: [chip]
+    };
+  }
+
+  addNewUnselectedGroups(unselectedGroups) {
+    this.modifiedList.splice(this.selectedGroupIndex, 0, ...unselectedGroups);
   }
 
   checkIfIsLastChipGroup(
@@ -78,5 +187,4 @@ export class DndGroupChipsComponent implements OnInit {
     return operandsIndex === (operandsLength - 1)
       && listIndex === (listLength - 1);
   }
-
 }

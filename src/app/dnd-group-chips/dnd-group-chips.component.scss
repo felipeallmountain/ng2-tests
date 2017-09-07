@@ -11,8 +11,9 @@
 
   .list {
     @extend .no-list-style;
-    background: red;
+    background: white;
     &__parent-elem {
+      background: red;
       margin: 15px 0;
       transition: all 0.2s ease;
 

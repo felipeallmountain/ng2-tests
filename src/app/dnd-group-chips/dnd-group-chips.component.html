@@ -2,7 +2,7 @@
   <nav class="grouper">
     <button *ngIf="selectedChipGroups.length > 1" (click)="group()">Group</button>        
     <button (click)="ungroup()">Ungroup</button>
-    <button (click)="selectAll()">Select All</button>
+    <button (click)="unselectAll()">Unselect All</button>
   </nav>
   <ul class="list"
     dnd-sortable-container
@@ -11,10 +11,12 @@
     <li class="list__parent-elem"
       *ngFor="let item of modifiedList; let i = index"
       dnd-sortable
+      dnd-droppable
+      (onDropSuccess)="onDropSuccess($event)"
       [sortableIndex]="i"
       [dragData]="item"
       (onDragSuccess)="onItemDragSuccess(item)"
-    > 
+    >
       <ul class="list__parent-elem--container">
         <li class="last-child"
           *ngFor="let childItem of item.operands; let j = index"
