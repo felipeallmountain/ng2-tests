@@ -4,7 +4,34 @@
     <button (click)="ungroup()">Ungroup</button>
     <button (click)="unselectAll()">Unselect All</button>
   </nav>
-  <ul class="list"
+
+  <div class="dnd-group-chips__container"
+    dnd-sortable-container
+    [sortableData]="modifiedList"
+    [dropZones]="['container-dropzone']"
+  >
+    <div class="dnd-group-chips__container--groups"
+      *ngFor="let item of modifiedList; let i = index"
+      dnd-sortable
+      [sortableIndex]="i"
+    >
+      <div class="chip-group"
+        dnd-sortable-container
+        [sortableData]="item.operands"
+        [dropZones]="['group-dropzone']"
+      >
+        <div class="chip-group__chip"
+          *ngFor="let chip of item.operands; let j = index"
+          dnd-sortable
+          [sortableIndex]="j"
+          [dragData]="chip"
+        >
+          {{chip.attributeDetails.taxonomyNodeName}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ul class="list"
     dnd-sortable-container
     [sortableData]="modifiedList"
   >
@@ -31,5 +58,5 @@
         </li>
       </ul>
     </li>
-  </ul>
+  </ul> -->
 </div>

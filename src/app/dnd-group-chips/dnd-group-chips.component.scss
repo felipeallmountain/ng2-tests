@@ -9,45 +9,63 @@
     margin-bottom: 20px;
   }
 
-  .list {
-    @extend .no-list-style;
-    background: white;
-    &__parent-elem {
-      background: red;
-      margin: 15px 0;
-      transition: all 0.2s ease;
+  &__container {
+    padding: 10px;
+    border: 1px solid black;
 
-      &.dnd-drag-start {
-        transform:scale(0.5);
-        opacity:0.7;
-        border: 2px dashed #000;
-      }
+    &--groups {
+      background: lightgray;
+      padding: 20px;
+      margin: 30px 0;
 
-      &.dnd-drag-enter {
-        opacity: 0.7;
-        border: 2px dashed #000;
+      .chip-group {
+        &__chip {
+          padding: 10px;
+          background: lightcoral;
+        }
       }
-
-      &.dnd-drag-over {
-        border: 2px dashed #000;
-      }
-
-      &.dnd-sortable-drag {
-        transform:scale(0.9);
-        opacity:0.9;
-        border: 1px dashed #000;
-      }
-
-      .name {
-        background: white;
-        padding: 2px;
-        height: 30px;
-        margin: 2px;
-      }
-      &--container {
-        @extend .no-list-style;
-      }      
     }
   }
+
+  // .list {
+  //   @extend .no-list-style;
+  //   background: white;
+  //   &__parent-elem {
+  //     background: red;
+  //     margin: 15px 0;
+  //     transition: all 0.2s ease;
+
+  //     &.dnd-drag-start {
+  //       transform:scale(0.5);
+  //       opacity:0.7;
+  //       border: 2px dashed #000;
+  //     }
+
+  //     &.dnd-drag-enter {
+  //       opacity: 0.7;
+  //       border: 2px dashed #000;
+  //     }
+
+  //     &.dnd-drag-over {
+  //       border: 2px dashed #000;
+  //     }
+
+  //     &.dnd-sortable-drag {
+  //       transform:scale(0.9);
+  //       opacity:0.9;
+  //       border: 1px dashed #000;
+  //     }
+
+  //     .name {
+  //       background: white;
+  //       padding: 2px;
+  //       height: 30px;
+  //       margin: 2px;
+  //     }
+  //     &--container {
+  //       @extend .no-list-style;
+  //     }      
+  //   }
+  // }
     
 }
