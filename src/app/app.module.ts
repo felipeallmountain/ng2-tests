@@ -11,6 +11,7 @@ import { DndGroupChipsComponent } from './dnd-group-chips/dnd-group-chips.compon
 import { ChipComponent } from './dnd-group-chips/chip/chip.component';
 import { Ng2DragDropSampleComponent } from './ng2-drag-drop-sample/ng2-drag-drop-sample.component';
 import { SortableJsComponent } from './sortable-js/sortable-js.component';
+import { SortableChipComponent } from './sortable-js/sortable-chip/sortable-chip.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SortableJsComponent } from './sortable-js/sortable-js.component';
     DndGroupChipsComponent,
     ChipComponent,
     Ng2DragDropSampleComponent,
-    SortableJsComponent
+    SortableJsComponent,
+    SortableChipComponent
   ],
   imports: [
     BrowserModule,

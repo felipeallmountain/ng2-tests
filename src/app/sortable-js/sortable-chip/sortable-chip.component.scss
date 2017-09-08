@@ -1,0 +1,11 @@
+.sortable-chip {
+  margin: 2px;
+  &__title {
+    background: lightgray;
+    transition: background 0.3s ease;
+    height: 80px;
+    &.selected {
+      background: gray;
+    }
+  }
+}

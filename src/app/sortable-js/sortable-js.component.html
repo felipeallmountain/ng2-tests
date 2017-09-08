@@ -1,19 +1,46 @@
+<nav class="grouper">
+    <button 
+      *ngIf="selectedChipGroups.length > 1" 
+      (click)="group()"
+    >
+      Group
+    </button>        
+    <button
+      (click)="ungroup()"
+    >
+      Ungroup
+    </button>
+    <button
+      (click)="unselectAll()"
+    >
+      Unselect All
+    </button>
+  </nav>
+
 <div class="container"
-  [sortablejs]="sortData"
+  [sortablejs]="modifiedList"
   [sortablejsOptions]="parentOptions"
+  [runInsideAngular]="true"
 >
   <div 
-    *ngFor="let group of sortData; let i = index"
+    *ngFor="let group of modifiedList; let i = index"
   >
     <div class="group-handle"></div>
     <div class="chip-group"
       [sortablejs]="group.operands"
       [sortablejsOptions]="options"
+      [runInsideAngular]="true"
     >
       <div class="chip"
-        *ngFor="let chip of group.operands"
+        *ngFor="let chip of group.operands; let j = index"
       >
-        {{chip.attributeDetails.taxonomyNodeName}}
+        <app-sortable-chip
+          [chipCollection]="group"
+          [chipData]="chip"
+          (onSelect)="selectChip($event)"
+          [isLast]="checkIfIsLastChipGroup(group.operands.length, j, modifiedList.length, i)"
+        >
+        </app-sortable-chip>        
       </div>
     </div>
   </div>
