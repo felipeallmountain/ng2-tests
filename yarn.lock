@@ -173,6 +173,10 @@
   dependencies:
     "@types/jasmine" "*"
 
+"@types/lodash@^4.14.74":
+  version "4.14.74"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.74.tgz#ac3bd8db988e7f7038e5d22bd76a7ba13f876168"
+
 "@types/node@^6.0.46", "@types/node@^6.0.88":
   version "6.0.88"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.88.tgz#f618f11a944f6a18d92b5c472028728a3e3d4b66"
@@ -271,6 +275,10 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular-sortablejs@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/angular-sortablejs/-/angular-sortablejs-2.0.6.tgz#2cb41ff35e3e39e309d0e8a291413a52a9a29960"
 
 ansi-escapes@^2.0.0:
   version "2.0.0"
@@ -3318,6 +3326,10 @@ ng2-dnd@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/ng2-dnd/-/ng2-dnd-4.2.0.tgz#85d7ac75199f39a3434b7c32b9ab006677b19b59"
 
+ng2-drag-drop@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/ng2-drag-drop/-/ng2-drag-drop-2.6.0.tgz#b806cf70cae768dca57ee5a9534d5ad7d919b665"
+
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
@@ -4755,6 +4767,10 @@ sort-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
   dependencies:
     is-plain-obj "^1.0.0"
+
+sortablejs@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.6.1.tgz#d120d103fbb9f60c7db27814a1384072e6c6e083"
 
 source-list-map@^2.0.0:
   version "2.0.0"

@@ -1,0 +1,20 @@
+<div class="container"
+  [sortablejs]="sortData"
+  [sortablejsOptions]="parentOptions"
+>
+  <div 
+    *ngFor="let group of sortData; let i = index"
+  >
+    <div class="group-handle"></div>
+    <div class="chip-group"
+      [sortablejs]="group.operands"
+      [sortablejsOptions]="options"
+    >
+      <div class="chip"
+        *ngFor="let chip of group.operands"
+      >
+        {{chip.attributeDetails.taxonomyNodeName}}
+      </div>
+    </div>
+  </div>
+</div>

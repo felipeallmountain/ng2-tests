@@ -21,10 +21,13 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular-sortablejs": "^2.0.6",
     "core-js": "^2.4.1",
     "lodash": "^4.17.4",
     "ng2-dnd": "^4.2.0",
+    "ng2-drag-drop": "^2.6.0",
     "rxjs": "^5.4.2",
+    "sortablejs": "^1.6.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
