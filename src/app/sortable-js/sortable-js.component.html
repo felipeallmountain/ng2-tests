@@ -11,6 +11,7 @@
       Ungroup
     </button>
     <button
+      *ngIf="selectedChipItems.length > 0"
       (click)="unselectAll()"
     >
       Unselect All
@@ -22,11 +23,11 @@
   [sortablejsOptions]="parentOptions"
   [runInsideAngular]="true"
 >
-  <div 
+  <div
+    class="chip-group"
     *ngFor="let group of modifiedList; let i = index"
   >
-    <div class="group-handle"></div>
-    <div class="chip-group"
+    <div class="chip-container"
       [sortablejs]="group.operands"
       [sortablejsOptions]="options"
       [runInsideAngular]="true"
@@ -35,6 +36,7 @@
         *ngFor="let chip of group.operands; let j = index"
       >
         <app-sortable-chip
+          class="chip-component"
           [chipCollection]="group"
           [chipData]="chip"
           [isLast]="checkIfIsLastChipGroup(group.operands.length, j, modifiedList.length, i)"
@@ -46,5 +48,6 @@
         </app-sortable-chip>        
       </div>
     </div>
+    <div class="group-handle"></div>
   </div>
 </div>

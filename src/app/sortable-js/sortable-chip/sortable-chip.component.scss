@@ -1,14 +1,27 @@
 .sortable-chip {
   margin: 2px;
-  &__title {
-    background: lightgray;
-    transition: background 0.3s ease;
-    height: 80px;
-    &.is-excluded {
-      background: lightgoldenrodyellow;
-    }
-    &.selected {
-      background: gray;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  &__handle {
+    width: 40px;
+    height: 60px;
+    background-color: black;
+  }
+
+  &__content {
+    width: 100%;
+    &--title {
+      background: lightgray;
+      transition: background 0.3s ease;
+      height: 80px;
+      &.is-excluded {
+        background: lightgoldenrodyellow;
+      }
+      &.selected {
+        background: gray;
+      }
+    }    
   }
 }

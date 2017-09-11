@@ -9,7 +9,7 @@ export class SortableChipComponent implements OnInit {
 
   @Input() chipData: any;
   @Input() chipCollection: any[];
-  @Input() isLast: false;
+  @Input() isLast = false;
   @Input() previousChipOperator: string;
   @Input() previousGroupOperator: string;
   @Output() onSelect = new EventEmitter<any>();
