@@ -12,7 +12,6 @@ import { FormArray } from '@angular/forms';
 export class SortableJsComponent implements OnInit {
 
   modifiedList = [];
-  displayList = [];
   parentOptions: SortablejsOptions;
   options: SortablejsOptions;
 
@@ -29,7 +28,6 @@ export class SortableJsComponent implements OnInit {
       animation: 200,
       handle: '.group-handle',
       onUpdate: (evt) => {
-        console.log('onUpdate', this.modifiedList);
         this.unselectAll();
       }
     };
@@ -40,6 +38,7 @@ export class SortableJsComponent implements OnInit {
       animation: 150,
       onEnd: (evt) => {
         this.removeEmptyGroups();
+        this.arrangeGroupOperands();
         this.unselectAll();
       }
     };
@@ -210,4 +209,17 @@ export class SortableJsComponent implements OnInit {
       && listIndex === (listLength - 1);
   }
 
+  checkPreviousChipOperator(chip: any, groupOperands: any[]): string {
+    const prevChipIndex = groupOperands.indexOf(chip) - 1;
+    return prevChipIndex > -1
+      ? groupOperands[prevChipIndex].logicalOperator
+      : 'AND';
+  }
+
+  checkPreviousGroupOperator(group: any): string {
+    const prevGroupIndex = this.modifiedList.indexOf(group) - 1;
+    return prevGroupIndex > -1
+      ? this.modifiedList[prevGroupIndex].logicalOperator
+      : 'AND';
+  }
 }

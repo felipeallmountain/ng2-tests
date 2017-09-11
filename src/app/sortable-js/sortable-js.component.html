@@ -37,8 +37,11 @@
         <app-sortable-chip
           [chipCollection]="group"
           [chipData]="chip"
-          (onSelect)="selectChip($event)"
           [isLast]="checkIfIsLastChipGroup(group.operands.length, j, modifiedList.length, i)"
+          (onSelect)="selectChip($event)"
+          (onOperatorChange)="arrangeGroupOperands()"
+          [previousChipOperator]="checkPreviousChipOperator(chip, group.operands)"
+          [previousGroupOperator]="checkPreviousGroupOperator(group)"
         >
         </app-sortable-chip>        
       </div>

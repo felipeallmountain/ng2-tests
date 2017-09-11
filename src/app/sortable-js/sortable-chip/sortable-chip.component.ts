@@ -10,7 +10,10 @@ export class SortableChipComponent implements OnInit {
   @Input() chipData: any;
   @Input() chipCollection: any[];
   @Input() isLast: false;
+  @Input() previousChipOperator: string;
+  @Input() previousGroupOperator: string;
   @Output() onSelect = new EventEmitter<any>();
+  @Output() onOperatorChange = new EventEmitter();
 
   constructor() { }
 
@@ -26,4 +29,12 @@ export class SortableChipComponent implements OnInit {
     this.onSelect.emit(chipSelected);
   }
 
+  operatorChange() {
+    this.onOperatorChange.emit();
+  }
+
+  isPreviousChipExcluded(): boolean {
+    return this.previousChipOperator === 'ANDNOT'
+      || this.previousGroupOperator === 'ANDNOT';
+  }
 }

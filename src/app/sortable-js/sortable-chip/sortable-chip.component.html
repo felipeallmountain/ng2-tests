@@ -1,6 +1,7 @@
 <div class="sortable-chip">
     <div class="sortable-chip__title"
       (click)="switchSelected($event)"
+      [class.is-excluded]="isPreviousChipExcluded()"
       [class.selected]="chipData.selected"
     >
         {{chipData.attributeDetails.taxonomyNodeName}}
@@ -8,7 +9,10 @@
     <div class="sortable-chip__selector"
       *ngIf="!isLast"
     >
-        <select name="select" [(ngModel)]="chipData.logicalOperator">
+        <select name="select" 
+          [(ngModel)]="chipData.logicalOperator"
+          (change)="operatorChange()"
+        >
           <option value="AND">and</option>
           <option value="OR">or</option>
           <option value="ANDNOT">exclude</option>

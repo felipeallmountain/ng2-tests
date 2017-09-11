@@ -4,6 +4,9 @@
     background: lightgray;
     transition: background 0.3s ease;
     height: 80px;
+    &.is-excluded {
+      background: lightgoldenrodyellow;
+    }
     &.selected {
       background: gray;
     }
