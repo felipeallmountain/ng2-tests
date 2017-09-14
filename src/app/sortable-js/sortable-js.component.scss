@@ -4,12 +4,11 @@
 
   .chip-group {
     background: lightblue;
-    margin-bottom: 20px;
-    padding: 20px;
     position: relative;
 
     .chip-container {
       z-index: 10;
+      min-height: 60px;
     }
 
     .group-handle {
@@ -21,4 +20,8 @@
       z-index: 0;
     }
   }
+}
+
+.chip-chosen {
+  opacity: 0.5;
 }

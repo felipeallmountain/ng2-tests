@@ -40,6 +40,17 @@ export class SortableJsComponent implements OnInit {
         this.removeEmptyGroups();
         this.arrangeGroupOperands();
         this.unselectAll();
+      },
+      chosenClass: 'chip-chosen',
+      onStart: (evt) => {
+        const chipGroup = evt.target.parentElement;
+        const parentGroup = chipGroup.parentElement;
+        const groupChildrenNum = evt.target.children.length - 1;
+        const groupIndex = Array.from(
+          parentGroup.children
+        ).indexOf(chipGroup);
+
+        this.createEmptyPlaceholders(groupChildrenNum, groupIndex);
       }
     };
     this.setChipsSelectedToFalse();
@@ -51,6 +62,65 @@ export class SortableJsComponent implements OnInit {
         childVal.selected = false;
       });
     });
+  }
+
+  createEmptyPlaceholders(groupChildren: number, groupIndex: number) {
+    if (groupChildren > 1) {
+      this.createInbetweenPlaceholders();
+    } else {
+      this.createCustomIndexPlaceholders(groupIndex);
+    }
+  }
+
+  createInbetweenPlaceholders(): void {
+    const listLength = (this.modifiedList.length + 1) * 2;
+    for (let index = 0; index < listLength; index++) {
+      this.createPlaceholders(index);
+    }
+  }
+
+  createCustomIndexPlaceholders(groupIndex: number): void {
+    switch (groupIndex) {
+      case 0:
+        this.createBeginningPlaceholders();
+      break;
+      case this.modifiedList.length - 1:
+        this.createEndingPlaceholders();
+      break;
+      default:
+        this.createCustomInbetweens(groupIndex);
+    }
+  }
+
+  createBeginningPlaceholders(): void {
+    const listLength = (this.modifiedList.length + 1) * 2;
+    const placeholdersLength = listLength - 2;
+    for (let index = 2; index < placeholdersLength; index++) {
+      this.createPlaceholders(index);
+    }
+  }
+
+  createEndingPlaceholders(): void {
+    const listLength = (this.modifiedList.length - 1) * 2;
+    for (let index = 0; index < listLength; index++) {
+      this.createPlaceholders(index);
+    }
+  }
+
+  createCustomInbetweens(index: number): void {
+    const selectedGroup = this.modifiedList[index];
+    this.createInbetweenPlaceholders();
+    const selectedGroupIndex = this.modifiedList.indexOf(selectedGroup);
+    const prevGroupIndex = selectedGroupIndex - 1;
+    const nextGroupIndex = selectedGroupIndex + 1;
+    this.modifiedList.splice(nextGroupIndex, 1);
+    this.modifiedList.splice(prevGroupIndex, 1);
+  }
+
+  createPlaceholders(index: number) {
+    if (index % 2 === 0) {
+      this.modifiedList.splice(index, 0, this.createNewGroup(null, true));
+    }
   }
 
   unselectAll(): void {
@@ -169,11 +239,11 @@ export class SortableJsComponent implements OnInit {
     );
   }
 
-  createNewGroup(chip) {
+  createNewGroup(chip, isEmpty = false): any {
     return {
-      logicalOperator: chip.logicalOperator,
+      logicalOperator: isEmpty ? 'AND' : chip.logicalOperator,
       notSignPresent: false,
-      operands: [chip]
+      operands: isEmpty ? [] : [chip]
     };
   }
 
